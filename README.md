@@ -1,1 +1,1 @@
-# cocos2d-x-custom-actions
+todo: readme, unit tests, code examples
