@@ -232,17 +232,17 @@ void FakeRotateX::update(float time)
 {
     PolygonInfo pi = target_->getPolygonInfo();
 
-    pi.triangles.verts[0].vertices.x = cosf(M_PI + CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
-    pi.triangles.verts[0].vertices.y = ( sinf(M_PI + CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_ + target_->getContentSize().height;
+	pi.triangles.verts[0].vertices.y = cosf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
+    pi.triangles.verts[0].vertices.x = ( sinf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_;
 
-    pi.triangles.verts[1].vertices.x = cosf(M_PI - CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
-    pi.triangles.verts[1].vertices.y = ( sinf(M_PI - CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ ) / depth_;
+    pi.triangles.verts[1].vertices.y = cosf(M_PI - CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
+    pi.triangles.verts[1].vertices.x = ( sinf(M_PI - CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ ) / depth_;
 
-    pi.triangles.verts[2].vertices.x = cosf(CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
-    pi.triangles.verts[2].vertices.y = ( sinf(CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ ) / depth_ + target_->getContentSize().height;
+    pi.triangles.verts[2].vertices.y = cosf(CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
+    pi.triangles.verts[2].vertices.x = ( sinf(CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ ) / depth_ + target_->getContentSize().width;
 
-    pi.triangles.verts[3].vertices.x = cosf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
-    pi.triangles.verts[3].vertices.y = ( sinf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_;
+    pi.triangles.verts[3].vertices.y = cosf(M_PI + CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
+    pi.triangles.verts[3].vertices.x = ( sinf(M_PI + CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_ + target_->getContentSize().width;
 
     target_->setPolygonInfo(pi);
 }
@@ -299,17 +299,17 @@ void FakeRotateY::update(float time)
 {
     PolygonInfo pi = target_->getPolygonInfo();
 
-    pi.triangles.verts[0].vertices.y = cosf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
-    pi.triangles.verts[0].vertices.x = ( sinf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_;
+    pi.triangles.verts[0].vertices.x = cosf(M_PI + CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
+    pi.triangles.verts[0].vertices.y = ( sinf(M_PI + CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_ + target_->getContentSize().height;
 
-    pi.triangles.verts[1].vertices.y = cosf(M_PI - CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
-    pi.triangles.verts[1].vertices.x = ( sinf(M_PI - CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ ) / depth_;
+    pi.triangles.verts[1].vertices.x = cosf(M_PI - CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
+    pi.triangles.verts[1].vertices.y = ( sinf(M_PI - CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ ) / depth_;
 
-    pi.triangles.verts[2].vertices.y = cosf(CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
-    pi.triangles.verts[2].vertices.x = ( sinf(CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ ) / depth_ + target_->getContentSize().width;
+    pi.triangles.verts[2].vertices.x = cosf(CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
+    pi.triangles.verts[2].vertices.y = ( sinf(CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ ) / depth_ + target_->getContentSize().height;
 
-    pi.triangles.verts[3].vertices.y = cosf(M_PI + CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
-    pi.triangles.verts[3].vertices.x = ( sinf(M_PI + CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_ + target_->getContentSize().width;
+    pi.triangles.verts[3].vertices.x = cosf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_ + radius_;
+    pi.triangles.verts[3].vertices.y = ( sinf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_;
 
     target_->setPolygonInfo(pi);
 }
