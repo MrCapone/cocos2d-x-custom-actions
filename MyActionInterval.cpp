@@ -219,7 +219,7 @@ void FakeRotateX::startWithTarget(Node *target)
 {
     RotateTo::startWithTarget(target);
 
-    radius_ = target->getContentSize().width / 2.0;
+    radius_ = target->getContentSize().height / 2.0;
 
     calculateAngles(startAngle_, diffAngle_, dstAngle_);
 
@@ -286,7 +286,7 @@ void FakeRotateY::startWithTarget(Node *target)
 {
     RotateTo::startWithTarget(target);
 
-    radius_ = target->getContentSize().height / 2.0;
+    radius_ = target->getContentSize().width / 2.0;
 
     calculateAngles(startAngle_, diffAngle_, dstAngle_);
 
