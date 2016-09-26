@@ -139,10 +139,8 @@ private:
 class FakeRotateX : public cocos2d::RotateTo
 {
 public:
-    /** creates the action */
-    static FakeRotateX* create(float duration, float startAngle, float dstAngle, float depth);
     /** creates the action with default dept = 6 */
-    static FakeRotateX* create(float duration, float startAngle, float dstAngle);
+    static FakeRotateX* create(float duration, float startAngle, float dstAngle, float depth = 6);
     /** initializes the action */
     bool init(float duration, float startAngle, float dstAngle, float depth);
 
@@ -170,10 +168,8 @@ private:
 class FakeRotateY : public cocos2d::RotateTo
 {
 public:
-    /** creates the action */
-    static FakeRotateY* create(float duration, float startAngle, float dstAngle, float depth);
     /** creates the action with default dept = 6 */
-    static FakeRotateY* create(float duration, float startAngle, float dstAngle);
+    static FakeRotateY* create(float duration, float startAngle, float dstAngle, float depth = 6);
     /** initializes the action */
     bool init(float duration, float startAngle, float dstAngle, float depth);
 
@@ -194,6 +190,50 @@ private:
 	float depth_;
 
 	cocos2d::Sprite *target_;
+};
+
+class LabelCounter : public cocos2d::ActionInterval
+{
+public:
+
+    static LabelCounter* create(float duration, int finalValue, int initialValue = 0);
+    /** initializes the action */
+    bool init(float duration, int finalValue, int initialValue);
+
+    virtual ~LabelCounter() {}
+
+protected:
+
+    virtual void startWithTarget(cocos2d::Node *target);
+
+    virtual void update(float time);
+
+    virtual void setValue(int value);
+
+    cocos2d::Label *target_;
+
+private:
+
+    int finalValue_;
+    int initialValue_;
+
+    int step_;
+};
+
+class LabelTimeCounter : public LabelCounter
+{
+public:
+
+    static LabelTimeCounter* create(float duration, int finalValue, int initialValue = 0);
+    /** initializes the action */
+    bool init(float duration, int finalValue, int initialValue);
+
+    virtual ~LabelTimeCounter() {}
+
+protected:
+
+    virtual void setValue(int value);
+
 };
 
 #endif /* defined(__cocos_sandbox__MyActionInterval__) */

@@ -194,12 +194,6 @@ FakeRotateX* FakeRotateX::create(float duration, float startAngle, float dstAngl
     return nullptr;
 }
 
-FakeRotateX* FakeRotateX::create(float duration, float startAngle, float dstAngle)
-{
-	//create instance with default depth = 6
-    return create(duration, startAngle, dstAngle, 6.0);
-}
-
 bool FakeRotateX::init(float duration, float startAngle, float dstAngle, float depth)
 {
     if (RotateTo::initWithDuration(duration, dstAngle, dstAngle)) {
@@ -261,12 +255,6 @@ FakeRotateY* FakeRotateY::create(float duration, float startAngle, float dstAngl
     return nullptr;
 }
 
-FakeRotateY* FakeRotateY::create(float duration, float startAngle, float dstAngle)
-{
-	//create instance with default depth = 6
-    return create(duration, startAngle, dstAngle, 6.0);
-}
-
 bool FakeRotateY::init(float duration, float startAngle, float dstAngle, float depth)
 {
     if (RotateTo::initWithDuration(duration, dstAngle, dstAngle)) {
@@ -312,4 +300,81 @@ void FakeRotateY::update(float time)
     pi.triangles.verts[3].vertices.y = ( sinf(-CC_DEGREES_TO_RADIANS(startAngle_ + diffAngle_*time) ) * radius_) / depth_;
 
     target_->setPolygonInfo(pi);
+}
+
+LabelCounter* LabelCounter::create(float duration, int finalValue, int initialValue)
+{
+    LabelCounter *action = new (std::nothrow) LabelCounter();
+    action->autorelease();
+
+    if (action->init(duration, finalValue, initialValue) ) {
+        return action;
+    }
+
+    return nullptr;
+}
+
+bool LabelCounter::init(float duration, int finalValue, int initialValue)
+{
+    if (ActionInterval::initWithDuration(duration)) {
+        finalValue_ = finalValue;
+        initialValue_ = initialValue;
+
+        target_ = nullptr;
+
+        return true;
+    }
+
+    return false;
+}
+
+void LabelCounter::startWithTarget(Node *target)
+{
+    ActionInterval::startWithTarget(target);
+
+    step_ = finalValue_ - initialValue_;
+
+    target_ = dynamic_cast<Label *>(target); //dynamic_cast maybe overhead, but this action works only with labels. todo: find better solution
+
+    CCASSERT(target_, "this action can be used only with label");
+
+    this->setValue(initialValue_);
+}
+
+void LabelCounter::update(float time)
+{
+    int value = initialValue_ + step_ * time;
+
+    this->setValue(value);
+}
+
+void LabelCounter::setValue(int value)
+{
+    target_->setString(std::to_string(value));
+}
+
+LabelTimeCounter* LabelTimeCounter::create(float duration, int finalValue, int initialValue)
+{
+    LabelTimeCounter *action = new (std::nothrow) LabelTimeCounter();
+    action->autorelease();
+
+    if (action->init(duration, finalValue, initialValue) ) {
+        return action;
+    }
+
+    return nullptr;
+}
+
+bool LabelTimeCounter::init(float duration, int finalValue, int initialValue)
+{
+    if (LabelCounter::init(duration, finalValue, initialValue)) {
+        return true;
+    }
+
+    return false;
+}
+
+void LabelTimeCounter::setValue(int value)
+{
+    target_->setString(StringUtils::format("%02i:%02i:%02i", value / 3600, value % 3600 / 60, value % 60));
 }
