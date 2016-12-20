@@ -201,6 +201,10 @@ public:
     bool init(float duration, int finalValue, int initialValue);
 
     virtual ~LabelCounter() {}
+    
+    virtual void setBeforeText(std::string text);
+    
+    virtual void setAfterText(std::string text);
 
 protected:
 
@@ -211,6 +215,9 @@ protected:
     virtual void setValue(int value);
 
     cocos2d::Label *target_;
+    
+    std::string _beforeText;
+    std::string _afterText;
 
 private:
 

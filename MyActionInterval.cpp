@@ -321,11 +321,24 @@ bool LabelCounter::init(float duration, int finalValue, int initialValue)
         initialValue_ = initialValue;
 
         target_ = nullptr;
+        
+        _beforeText = "";
+        _afterText = "";
 
         return true;
     }
 
     return false;
+}
+
+void LabelCounter::setBeforeText(std::string text)
+{
+    _beforeText = text;
+}
+
+void LabelCounter::setAfterText(std::string text)
+{
+    _afterText = text;
 }
 
 void LabelCounter::startWithTarget(Node *target)
@@ -350,7 +363,7 @@ void LabelCounter::update(float time)
 
 void LabelCounter::setValue(int value)
 {
-    target_->setString(std::to_string(value));
+    target_->setString(StringUtils::format("%s%s%s", _beforeText.c_str(), std::to_string(value).c_str(), _afterText.c_str()));
 }
 
 LabelTimeCounter* LabelTimeCounter::create(float duration, int finalValue, int initialValue)
@@ -376,5 +389,5 @@ bool LabelTimeCounter::init(float duration, int finalValue, int initialValue)
 
 void LabelTimeCounter::setValue(int value)
 {
-    target_->setString(StringUtils::format("%02i:%02i:%02i", value / 3600, value % 3600 / 60, value % 60));
+    target_->setString(StringUtils::format("%s%02i:%02i:%02i%s", _beforeText.c_str(), value / 3600, value % 3600 / 60, value % 60, _afterText.c_str()));
 }
