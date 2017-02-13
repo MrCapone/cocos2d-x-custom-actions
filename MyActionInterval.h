@@ -140,7 +140,7 @@ class FakeRotateX : public cocos2d::RotateTo
 {
 public:
     /** creates the action with default dept = 6 */
-    static FakeRotateX* create(float duration, float startAngle, float dstAngle, float depth = 6);
+    static FakeRotateX* create(float duration, float startAngle, float dstAngle, float depth = 6.0f);
     /** initializes the action */
     bool init(float duration, float startAngle, float dstAngle, float depth);
 
@@ -169,7 +169,7 @@ class FakeRotateY : public cocos2d::RotateTo
 {
 public:
     /** creates the action with default dept = 6 */
-    static FakeRotateY* create(float duration, float startAngle, float dstAngle, float depth = 6);
+    static FakeRotateY* create(float duration, float startAngle, float dstAngle, float depth = 6.0f);
     /** initializes the action */
     bool init(float duration, float startAngle, float dstAngle, float depth);
 
@@ -192,11 +192,13 @@ private:
 	cocos2d::Sprite *target_;
 };
 
+/**  Create animation of digital counter
+ */
 class LabelCounter : public cocos2d::ActionInterval
 {
 public:
-
-    static LabelCounter* create(float duration, int finalValue, int initialValue = 0);
+    /** creates the action with initial value = 0 */
+    static LabelCounter* create(float duration, int finalValue, int initialValue = 0.0f);
     /** initializes the action */
     bool init(float duration, int finalValue, int initialValue);
 
@@ -227,11 +229,13 @@ private:
     int step_;
 };
 
+/**  Create animation of timer counter
+ */
 class LabelTimeCounter : public LabelCounter
 {
 public:
-
-    static LabelTimeCounter* create(float duration, int finalValue, int initialValue = 0);
+    /** creates the action with initial value = 0 */
+    static LabelTimeCounter* create(float duration, int finalValue, int initialValue = 0.0f);
     /** initializes the action */
     bool init(float duration, int finalValue, int initialValue);
 

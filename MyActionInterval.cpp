@@ -89,8 +89,8 @@ void RotateAroundBy::startWithTarget(Node *target)
 
 void RotateAroundBy::update(float time)
 {
-    float x = cos(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.x)-rotationPoint_.x) - sin(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.x;
-    float y = sin(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.x)-rotationPoint_.x) + cos(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.y;
+    float x = cosf(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.x)-rotationPoint_.x) - sinf(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.x;
+    float y = sinf(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.x)-rotationPoint_.x) + cosf(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.y;
     
     _target->setPosition(x, y);
     _target->setRotation( (startAngle_ + angle_ * time ) );
@@ -132,8 +132,8 @@ void MoveAroundTo::startWithTarget(Node *target)
 
 void MoveAroundTo::update(float time)
 {
-    float x = cos(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.x)-rotationPoint_.x) - sin(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.x;
-    float y = sin(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.x)-rotationPoint_.x) + cos(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.y;
+    float x = cosf(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.x)-rotationPoint_.x) - sinf(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.x;
+    float y = sinf(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.x)-rotationPoint_.x) + cosf(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.y;
     
     _target->setPosition(x, y);
 }
@@ -174,8 +174,8 @@ void MoveAroundBy::startWithTarget(Node *target)
 
 void MoveAroundBy::update(float time)
 {
-    float x = cos(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.x)-rotationPoint_.x) - sin(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.x;
-    float y = sin(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.x)-rotationPoint_.x) + cos(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.y;
+    float x = cosf(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.x)-rotationPoint_.x) - sinf(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.x;
+    float y = sinf(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.x)-rotationPoint_.x) + cosf(CC_DEGREES_TO_RADIANS(-angle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.y;
     
     _target->setPosition(x, y);
 }
@@ -213,7 +213,7 @@ void FakeRotateX::startWithTarget(Node *target)
 {
     RotateTo::startWithTarget(target);
 
-    radius_ = target->getContentSize().height / 2.0;
+    radius_ = target->getContentSize().height / 2.0f;
 
     calculateAngles(startAngle_, diffAngle_, dstAngle_);
 
@@ -302,6 +302,8 @@ void FakeRotateY::update(float time)
     target_->setPolygonInfo(pi);
 }
 
+// LabelCounter
+
 LabelCounter* LabelCounter::create(float duration, int finalValue, int initialValue)
 {
     LabelCounter *action = new (std::nothrow) LabelCounter();
@@ -363,8 +365,10 @@ void LabelCounter::update(float time)
 
 void LabelCounter::setValue(int value)
 {
-    target_->setString(StringUtils::format("%s%s%s", _beforeText.c_str(), std::to_string(value).c_str(), _afterText.c_str()));
+    target_->setString(StringUtils::format("%s%i%s", _beforeText.c_str(), value, _afterText.c_str()));
 }
+
+// LabelTimeCounter
 
 LabelTimeCounter* LabelTimeCounter::create(float duration, int finalValue, int initialValue)
 {
