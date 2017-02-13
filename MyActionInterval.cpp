@@ -46,8 +46,8 @@ void RotateAroundTo::startWithTarget(Node *target)
 
 void RotateAroundTo::update(float time)
 {
-    float x = cos(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.x)-rotationPoint_.x) - sin(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.x;
-    float y = sin(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.x)-rotationPoint_.x) + cos(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.y;
+    float x = cosf(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.x)-rotationPoint_.x) - sinf(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.x;
+    float y = sinf(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.x)-rotationPoint_.x) + cosf(CC_DEGREES_TO_RADIANS(-diffAngle_*time)) * ((startPosition_.y)-rotationPoint_.y) + rotationPoint_.y;
     
     _target->setPosition(x, y);
     _target->setRotation( (startAngle_ + diffAngle_ * time ) );
